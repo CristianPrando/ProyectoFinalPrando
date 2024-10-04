@@ -1,0 +1,13 @@
+{% extends 'padre.html' %}
+
+{% block cambios1 %}
+  
+  <form action="{% url 'Registro' %}" method="post" class="formulario_centrado">{% csrf_token %}
+
+    {{mi_formulario.as_p}}
+
+    <button type="submit">Registrarse</button>
+
+  </form>
+  
+{% endblock cambios1 %}

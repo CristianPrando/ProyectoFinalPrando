@@ -1,8 +1,12 @@
-<a href="{% url 'inicio' %}">Ir al inicio</a>
+{% extends 'padre.html' %}
 
+
+{% block cambios1 %}
+  
+<br>
 <h1>Lista de amigurumis</h1>
 
-  <ul>
+<ul>
     
     {% for amigurumi in amigurumis %}
     <img src="{{ amigurumis.imagen.url }}" alt="{{ amigurumi.nombre }}" style="width: 100px; height: auto;">
@@ -20,5 +24,8 @@
     {% endfor %}
       
   </ul>
-
+  <br><br><br><br>
+  
+  {% endblock cambios1 %}
+  <a href="{% url 'inicio' %}">Ir al inicio</a>
   <a href="{% url 'creaamigurumi' %}">Crea amigurumi</a>

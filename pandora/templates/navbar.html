@@ -1,0 +1,62 @@
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="{% url 'inicio' %}">Pandora Tejidos</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'sobrenosotros' %}">Sobre nosotros</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'listaamigurumis' %}">Amigurumis</a></li>
+                        <li><a class="dropdown-item" href="#!">Ropa</a></li>
+                        <li><a class="dropdown-item" href="#!">Insumos</a></li>
+                    </ul>
+                </li>
+            </ul>
+            
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav ms-auto">
+                    {% if not user.is_superuser %}
+                    <li class="nav-item d-flex align-items-center">
+                        <p class="nav-link mb-0">Bienvenido/a {{user.username}}</p>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mi cuenta</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'listaamigurumis' %}">Ver Perfil</a></li>
+                            <li><a class="dropdown-item" href="#!">Editar Perfil</a></li>
+                            <!-- <li><a class="dropdown-item" href="#!">Insumos</a></li> -->
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% if user.is_superuser %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'creaamigurumi' %}">Nuevo Producto</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'listaamigurumis' %}">Editar Producto</a></li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <form action="{% url 'Logout' %}" method="post" class="d-flex align-items-center">{% csrf_token %}
+                            <button class="btn btn-link nav-link" type="submit">Cerrar sesión</button>
+                        </form>
+                    </li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'Login' %}">Iniciar sesión</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'Registro' %}">Registrarse</a></li>
+                </ul>
+            {% endif %}
+            {% if not user.is_superuser %}
+            <form class="d-flex">
+                <button class="btn btn-outline-dark" type="submit">
+                    <i class="bi-cart-fill me-1"></i>
+                    Mi Carrito
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                </button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</nav>
