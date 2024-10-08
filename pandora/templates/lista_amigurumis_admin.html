@@ -1,6 +1,5 @@
 {% extends 'padre.html' %}
 
-
 {% block cambios1 %}
   
 <br>
@@ -15,14 +14,18 @@
       </li>
       <div style="display: flex; column-gap: 5px;">
         <button>
-          <a href="{% url 'detalleamigurumi' amigurumi.id %}">Detalle</a>
+          <a href="{% url 'actualizaamigurumi' amigurumi.id %}">Actualizar</a>
+        </button>
+        <button>
+          <a href="{% url 'eliminaramigurumi' amigurumi.id %}">Eliminar</a>
         </button>
       </div>
     {% endfor %}
       
   </ul>
-  <br><br><br><br>
+  <br>
+  <a href="{% url 'inicio' %}">Ir al inicio</a>
+  <a href="{% url 'creaamigurumi' %}">Crea amigurumi</a>
+  <br><br><br>
   
   {% endblock cambios1 %}
-  <a href="{% url 'inicio' %}">Ir al inicio</a>
- 

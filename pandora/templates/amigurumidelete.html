@@ -1,0 +1,16 @@
+{% extends 'padre.html' %}
+
+{% block cambios1 %}
+  <h2>{{ amigurumi.nombre }}</h2>
+  <form action="{% url 'eliminaramigurumi' amigurumi.id %}" method="post">{% csrf_token %}
+
+    <p>Estas seguro que deseas eliminar el registro?</p>
+    
+    <form action="{% url 'eliminacionexitosa' %}" method="post">
+      <button type="submit">Confirmar</button>
+    </form>
+    <button><a href="{% url 'listaamigurumisadmin' %}">Cancelar</a></button>
+
+  </form>
+  
+{% endblock cambios1 %}

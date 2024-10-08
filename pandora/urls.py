@@ -25,8 +25,17 @@ urlpatterns = [
     path('', inicio, name='inicio'),
     path('sobrenosotros', sobrenosotros, name='sobrenosotros'),
     path('listaamigurumis/', AmigurumisList.as_view(), name='listaamigurumis'),
+    path('listaamigurumisadmin/', AmigurumisListAdmin.as_view(), name='listaamigurumisadmin'),
     path('creaamigurumi/', AmigurumisCreate.as_view(), name='creaamigurumi'),
+    path('creacionexitosa/', creacionexitosa, name='creacionexitosa'),
+    path('actualizaamigurumi/<pk>', AmigurumiUpdate.as_view(), name='actualizaamigurumi'),
+    path('actualizacionexitosa/', actualizacionexitosa, name='actualizacionexitosa'),
+    path('detalleamigurumi/<pk>', AmigurumiDetail.as_view(), name='detalleamigurumi'),
+    path('eliminaramigurumi/<pk>', AmigurumiDelete.as_view(), name='eliminaramigurumi'),
+    path('eliminacionexitosa/', eliminacionexitosa, name='eliminacionexitosa'),
     path('registro/', register, name='Registro'),
     path('login/', login_view, name='Login'),
     path('logout/', LogoutView.as_view(template_name="Logout.html"), name='Logout'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
