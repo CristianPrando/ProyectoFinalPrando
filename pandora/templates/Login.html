@@ -1,28 +1,22 @@
 {% extends 'padre.html' %}
 
 
-{% block cambioencabezado %}
-    
-<header class="bg-dark py-5" style="background-image: url('media/Prueba.png'); background-size: cover; background-position: center;">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-left text-black">
-            <h1 class="display-4 fw-bolder">Ingrese sus datos para iniciar sesión</h1>
-            <!-- <p class="lead fw-normal text-black-50 mb-0">Hecho con amor!</p> -->
-        </div>
-    </div>    
-</header>
 
+{% block cambioencabezado %}
+
+          <h1 class="display-4 fw-bolder">Hola!</h1>
+          <p class="lead fw-normal text-black-50 mb-0">Ingrese sus datos para acceder a la web!</p>
+      
 {% endblock cambioencabezado %}
 {% block cambios1 %}
 
     <br><br><br>
-    <form action="{% url 'Login' %}" method="post" class="text-center">{% csrf_token %}
-
-        {{mi_formulario.as_p}}
-
-        <button type="submit">Iniciar Sesion</button>
-
-    </form>
+    <div style="flex: 1; max-width: 400px; margin: 0 auto; border: 3px solid #f3b1b1; padding: 20px; border-radius: 5px;">
+        <form action="{% url 'Login' %}" method="post" class="text-center">{% csrf_token %}
+            {{ mi_formulario.as_p }}
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+    </div>
     <br><br><br><br><br>
   
 {% endblock cambios1 %}

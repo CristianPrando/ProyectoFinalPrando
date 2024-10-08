@@ -11,26 +11,30 @@
 {% block cambios1 %}
   
 <br>
-<h1>Lista de amigurumis</h1>
+<!-- <h3>Lista de amigurumis</h3> -->
 
-<ul>
-    
+
+<ul style="list-style-type: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px;">
     {% for amigurumi in amigurumis %}
-      <li>
-        <img src="{{amigurumi.imagen.url}}" alt="{{amigurumi.nombre}}" style="width: 100px; height: auto;">
-        <br>
-        {{ amigurumi }} -
-        <br>
-        Precio: {{ amigurumi.precio }}
+      <li style="flex: 0 1 calc(25% - 10px); margin-left: 10px;"> 
+        <div style="border: 3px solid #f3b1b1; border-radius: 5px; padding: 20px; background-color: #ffe6f2; text-align: center;">
+          <img src="{{ amigurumi.imagen.url }}" alt="{{ amigurumi.nombre }}" style="width: 200px; height: auto;">
+          <br>
+          {{ amigurumi }} -
+          <br>
+          Precio: {{ amigurumi.precio }}
+          <div style="display: flex; justify-content: center; margin-top: 10px;">
+            <button style="margin-right: 10px;">
+              <a href="{% url 'detalleamigurumi' amigurumi.id %}" style="text-decoration: none; color: inherit;">Detalle</a>
+            </button>
+            <button>
+              <a href="#!" style="text-decoration: none; color: inherit;">Añadir al carrito</a>
+            </button>
+          </div>
+        </div>
       </li>
-      <div style="display: flex; column-gap: 5px;">
-        <button>
-          <a href="{% url 'detalleamigurumi' amigurumi.id %}">Detalle</a>
-        </button>
-      </div>
     {% endfor %}
-  
-  </ul>
+</ul>
   <br><br><br><br>
   
   {% endblock cambios1 %}
