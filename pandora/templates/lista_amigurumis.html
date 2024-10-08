@@ -1,6 +1,13 @@
 {% extends 'padre.html' %}
 
 
+{% block cambioencabezado %}
+
+          <h1 class="display-4 fw-bolder">Amigurumis!</h1>
+          <p class="lead fw-normal text-black-50 mb-0">Hechos a mano.</p>
+      
+{% endblock cambioencabezado %}
+  
 {% block cambios1 %}
   
 <br>
@@ -9,9 +16,12 @@
 <ul>
     
     {% for amigurumi in amigurumis %}
-    <img src="{{ amigurumis.imagen.url }}" alt="{{ amigurumi.nombre }}" style="width: 100px; height: auto;">
       <li>
-        {{ amigurumi }}
+        <img src="{{amigurumi.imagen.url}}" alt="{{amigurumi.nombre}}" style="width: 100px; height: auto;">
+        <br>
+        {{ amigurumi }} -
+        <br>
+        Precio: {{ amigurumi.precio }}
       </li>
       <div style="display: flex; column-gap: 5px;">
         <button>
@@ -19,7 +29,7 @@
         </button>
       </div>
     {% endfor %}
-      
+  
   </ul>
   <br><br><br><br>
   

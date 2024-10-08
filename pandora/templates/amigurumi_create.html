@@ -1,9 +1,24 @@
+{% extends 'padre.html' %}
+
+{% block cambioencabezado %}
+
+          <p class="display-4 fw-bolder">Crear nuevo amigurumi<p>
+          <p class="lead fw-normal text-black-50 mb-0">Ingrese los datos necesarios a continuación </p>
+      
+{% endblock cambioencabezado %}
+
+
+{% block cambios1 %}
+  
+<br><br>
 <form action="{% url 'creaamigurumi' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-
-    {{form.as_p}}
-
-    <button type="submit">Enviar</button>
-
-  </form>
+  
+  {{form.as_p}}
+  
+  <button type="submit">Enviar</button>
+  
+</form>
 
 <a href="{% url 'inicio' %}">Volver al inicio</a>
+
+{% endblock cambios1 %}

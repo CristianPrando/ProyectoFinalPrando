@@ -2,13 +2,13 @@
 
 {% block cambios1 %}
   
-  <h2>Vista en detalle del producto</h2>
+  <h2>Detalle de {{amigurumis.nombre}} </h2>
 
-  <h2>Nombre: {{amigurumis.nombre}}</h2>
+  <h4>Nombre: {{amigurumis.nombre}}</h4>
     <h6><div><p>
     <br>
     <br> 
-    <img src="{{ amigurumis.imagen.url }}" alt="{{ amigurumis.nombre }}" style="max-width: 100%; height: auto;">
+    <img src="{{ amigurumis.imagen.url }}" alt="{{ amigurumis.nombre }}" style="width: 300px; height: auto;">
     <br>
     <br>
     Descripción: {{amigurumis.descripcion}}

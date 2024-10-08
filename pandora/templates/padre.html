@@ -19,18 +19,18 @@
         
         {% include 'navbar.html' %}
         
-        {% block cambioencabezado %}
         
-        <header class="bg-dark py-5" style="background-image: url('media/Prueba.png'); background-size: cover; background-position: center;">
+        <header class="bg-dark py-5" style="background-image: url('/media/Prueba.png'); background-size: cover; background-position: center;">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-left text-black">
+                    {% block cambioencabezado %}
                     <h1 class="display-4 fw-bolder">Pandora Tejidos!</h1>
                     <p class="lead fw-normal text-black-50 mb-0">Hecho con amor!</p>
+                    {% endblock cambioencabezado %}
                 </div>
             </div>
         </header>
         <!-- Header-->
-        {% endblock cambioencabezado %}
 
         {% block cambios1 %}
         <!-- Section-->

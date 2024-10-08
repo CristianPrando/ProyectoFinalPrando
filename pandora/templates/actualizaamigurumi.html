@@ -1,17 +1,31 @@
 {% extends 'padre.html' %}
 
+{% block cambioencabezado %}
+
+          <p class="display-4 fw-bolder">Actualizar datos del producto <p>
+          <p class="lead fw-normal text-black-50 mb-0">Ingrese los datos necesarios a continuación </p>
+      
+{% endblock cambioencabezado %}
 
 {% block cambios1 %}
     
- 
-  <form action="{% url 'actualizaamigurumi' amigurumi.id %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+<div style="display: flex; justify-content: space-between; align-items: flex-start;">
 
-    {{form.as_p}}
+  <!-- Columna izquierda (imagen) -->
+  <div style="flex: 1; margin-top: 20px; margin-right: 20px; display: flex; justify-content: center;">
+      <img src="{{ amigurumi.imagen.url }}" alt="{{ amigurumi.nombre }}" style="width: 600px; height: auto;">
+  </div>
 
-    <button type="submit">Actualizar</button>
+  <!-- Columna derecha (formulario) -->
+  <div style="flex: 1; border: 3px solid #f3b1b1; padding: 20px; border-radius: 5px;">
+      <form action="{% url 'actualizaamigurumi' amigurumi.id %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Actualizar</button>
+      </form>
+  </div>
 
-  </form>
-  
+</div>
 
 
 {% endblock cambios1 %}

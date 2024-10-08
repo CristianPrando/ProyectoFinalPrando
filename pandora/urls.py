@@ -36,6 +36,7 @@ urlpatterns = [
     path('registro/', register, name='Registro'),
     path('login/', login_view, name='Login'),
     path('logout/', LogoutView.as_view(template_name="Logout.html"), name='Logout'),
+    path('editarperfil/', editar_perfil, name='editarperfil'),
 ]
 
 urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

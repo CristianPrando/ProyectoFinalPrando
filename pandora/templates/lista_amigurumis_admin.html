@@ -8,8 +8,8 @@
 <ul>
     
     {% for amigurumi in amigurumis %}
-    <img src="{{ amigurumis.imagen.url }}" alt="{{ amigurumi.nombre }}" style="width: 100px; height: auto;">
       <li>
+        <img src="{{amigurumi.imagen.url}}" alt="{{amigurumis.nombre}}" style="width: 100px; height: auto;">
         {{ amigurumi }}
       </li>
       <div style="display: flex; column-gap: 5px;">

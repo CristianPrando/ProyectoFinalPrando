@@ -1,15 +1,22 @@
 {% extends 'padre.html' %}
 
+{% block cambioencabezado %}
+
+          <p class="display-4 fw-bolder">Está seguro? <p>
+          <p class="lead fw-normal text-black-50 mb-0">Desea eliminar registro? </p>
+      
+{% endblock cambioencabezado %}
+
 {% block cambios1 %}
   <h2>{{ amigurumi.nombre }}</h2>
   <form action="{% url 'eliminaramigurumi' amigurumi.id %}" method="post">{% csrf_token %}
 
-    <p>Estas seguro que deseas eliminar el registro?</p>
+    <p>Elija a continuación la opción deseada:</p>
     
     <form action="{% url 'eliminacionexitosa' %}" method="post">
       <button type="submit">Confirmar</button>
+      <button><a href="{% url 'listaamigurumisadmin' %}">Cancelar</a></button>
     </form>
-    <button><a href="{% url 'listaamigurumisadmin' %}">Cancelar</a></button>
 
   </form>
   

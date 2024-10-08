@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, UserEditForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+import os
 # Create your views here.
 
 def inicio(req):
@@ -64,6 +65,15 @@ class AmigurumiDelete(DeleteView):
   template_name = 'amigurumidelete.html'
   success_url = reverse_lazy('eliminacionexitosa')
   context_object_name = 'amigurumi'
+
+  def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if self.object.imagen:
+            if os.path.isfile(self.object.imagen.path):
+                os.remove(self.object.imagen.path)
+
+        return super().delete(request, *args, **kwargs)
 
 def eliminacionexitosa(req):
    return render(req, 'eliminacionexitosa.html')
@@ -138,3 +148,29 @@ def editar_perfil(req):
     return render(req, "editar_perfil.html", { "mi_formulario": mi_formulario })  
   
 
+@login_required()
+def editar_perfil(req):
+
+  usuario = req.user
+
+  if req.method == 'POST':
+    
+    mi_formulario= UserEditForm(req.POST, instance=req.user)
+    if mi_formulario.is_valid():
+
+      data = mi_formulario.cleaned_data
+      usuario.first_name = data['first_name']
+      usuario.last_name = data['last_name']
+      usuario.email = data['email']
+      usuario.set_password(data["password1"])
+      usuario.save()
+
+      return render(req, "inicio.html", { "mensaje": f"Datos actualizados exitosamente!"})
+
+    else:
+      return render(req, "editar_perfil.html", { "mi_formulario": mi_formulario })    
+
+  else:
+
+    mi_formulario = UserEditForm(instance=req.user)
+    return render(req, "editar_perfil.html", { "mi_formulario": mi_formulario })  

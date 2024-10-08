@@ -1,9 +1,15 @@
 {% extends 'padre.html' %}
 
+{% block cambioencabezado %}
+
+          <p class="display-4 fw-bolder">Éxito <p>
+          <p class="lead fw-normal text-black-50 mb-0">Su registro ha sido eliminado con exito </p>
+      
+{% endblock cambioencabezado %}
 
 {% block cambios1 %}
 <br><br><br>
-<h1>Su producto ha sido actualizado con éxito!</h1>
+<h1>¿Qué desea hacer a continuación?</h1>
 
 <a href="{% url 'inicio' %}">Volver al inicio</a>
 <a href="{% url 'listaamigurumisadmin' %}">Volver a la lista de amigurumis</a>
