@@ -1,0 +1,45 @@
+{% extends 'padre.html' %}
+
+
+
+{% block cambioencabezado %}
+
+          <h1 class="display-4 fw-bolder">Carrito de comprar</h1>
+          <p class="lead fw-normal text-black-50 mb-0">Elija a continuación las acciones a realizar</p>
+      
+{% endblock cambioencabezado %}
+
+{% block cambios1 %}
+
+
+<ul style="list-style-type: none; padding: 0;">
+    {% for item in carrito_items %}
+    <li style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+        <div style="display: flex; align-items: center;">
+            <img src="{{ item.amigurumi.imagen.url }}" alt="{{ item.amigurumi.nombre }}" style="width: 100px; height: auto; margin-right: 10px;">
+            <div>
+                <h2>{{ item.amigurumi.nombre }}</h2>
+                <p>Precio: {{ item.amigurumi.precio }}</p>
+                <p>Cantidad: {{ item.cantidad }}</p>
+                
+                <form action="{% url 'eliminar_producto' item.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Eliminar</button>
+                </form>
+
+                <form action="{% url 'actualizar_cantidad' item.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="number" name="cantidad" value="{{ item.cantidad }}" min="1">
+                    <button type="submit">Actualizar</button>
+                </form>
+            </div>
+        </div>
+    </li>
+    {% empty %}
+    <li>No hay productos en el carrito.</li>
+    {% endfor %}
+</ul>
+
+<h3>Total: {{ total }}</h3>
+<a href="{% url 'inicio' %}">Volver al inicio</a>
+{% endblock cambios1 %}

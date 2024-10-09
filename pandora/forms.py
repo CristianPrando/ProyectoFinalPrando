@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
+from .models import Avatar
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -42,3 +43,10 @@ class UserEditForm(UserChangeForm):
     
     else:
       return password2
+    
+
+class AvatarFormulario(forms.ModelForm):
+
+  class Meta:
+    model=Avatar
+    fields=('imagen',)

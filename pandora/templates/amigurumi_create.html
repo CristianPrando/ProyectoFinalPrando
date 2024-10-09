@@ -11,14 +11,14 @@
 {% block cambios1 %}
   
 <br><br>
-<form action="{% url 'creaamigurumi' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+<div style="flex: 1; max-width: 500px; margin: 0 auto; border: 3px solid #f3b1b1; padding: 20px; border-radius: 5px;">
+  <form action="{% url 'creaamigurumi' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
   
-  {{form.as_p}}
+    {{form.as_p}}
   
-  <button type="submit">Crear</button>
-  
-</form>
-
-<a href="{% url 'inicio' %}">Volver al inicio</a>
+    <button type="submit">Crear</button>
+  </form>
+  <a href="{% url 'inicio' %}">Volver al inicio</a>
+</div>
 
 {% endblock cambios1 %}

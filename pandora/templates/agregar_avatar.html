@@ -1,0 +1,24 @@
+{% extends 'padre.html' %}
+
+
+
+{% block cambioencabezado %}
+
+          <h1 class="display-4 fw-bolder">Agregar Avatar</h1>
+          <p class="lead fw-normal text-black-50 mb-0">Cree o actualice su avatar a continuacion</p>
+      
+{% endblock cambioencabezado %}
+
+{% block cambios1 %}
+  
+<form action="{% url 'AgregarAvatar' %}" enctype="multipart/form-data" method="post">{% csrf_token %}
+
+    {{mi_formulario.as_p}}
+
+    <button type="submit">Agregar</button>
+
+</form>
+      
+
+  
+  {% endblock cambios1 %}

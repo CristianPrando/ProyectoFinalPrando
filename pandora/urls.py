@@ -37,6 +37,11 @@ urlpatterns = [
     path('login/', login_view, name='Login'),
     path('logout/', LogoutView.as_view(template_name="Logout.html"), name='Logout'),
     path('editarperfil/', editar_perfil, name='editarperfil'),
+    path('agregar-avatar/', agregar_avatar, name='AgregarAvatar'),
+    path('carrito/', carrito_view, name='carrito'),
+    path('agregar_al_carrito/<int:amigurumi_id>/', agregar_al_carrito, name='agregar_al_carrito'),
+    path('carrito/eliminar/<int:id>/', eliminar_producto, name='eliminar_producto'),
+    path('carrito/actualizar/<int:id>/', actualizar_cantidad, name='actualizar_cantidad'),
 ]
 
 urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

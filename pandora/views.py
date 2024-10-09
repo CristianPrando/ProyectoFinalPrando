@@ -6,8 +6,9 @@ from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserCreationForm, UserEditForm
+from .forms import CustomUserCreationForm, UserEditForm, AvatarFormulario
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Sum
 from django.urls import reverse_lazy
 import os
 # Create your views here.
@@ -174,3 +175,68 @@ def editar_perfil(req):
 
     mi_formulario = UserEditForm(instance=req.user)
     return render(req, "editar_perfil.html", { "mi_formulario": mi_formulario })  
+  
+def agregar_avatar(req):
+
+  if req.method == 'POST':
+    
+    mi_formulario= AvatarFormulario(req.POST, req.FILES)
+    if mi_formulario.is_valid():
+
+      data = mi_formulario.cleaned_data
+      avatar = Avatar(user=req.user, imagen=data["imagen"])
+      avatar.save()
+
+      return render(req, "inicio.html", { "mensaje": f"Avatar creado correctamente!"})
+
+    else:
+      return render(req, "agregar_avatar.html", { "mi_formulario": mi_formulario })    
+
+  else:
+
+    mi_formulario = AvatarFormulario()
+    return render(req, "agregar_avatar.html", { "mi_formulario": mi_formulario })
+  
+def carrito_view(request):
+    # Asegúrate de que el usuario esté autenticado
+    if request.user.is_authenticated:
+        carrito_items = Carrito.objects.filter(user=request.user)
+        total = sum(item.amigurumi.precio * item.cantidad for item in carrito_items)
+        return render(request, 'carrito.html', {'carrito_items': carrito_items, 'total': total})
+    else:
+        return redirect('Login')  # Redirige al usuario si no está autenticado
+
+def agregar_al_carrito(req, amigurumi_id):
+    if not req.user.is_authenticated:
+        return redirect('Login')  
+
+    amigurumi = Amigurumis.objects.get(id=amigurumi_id)
+    
+    carrito_item, created = Carrito.objects.get_or_create(
+        amigurumi=amigurumi,
+        user=req.user  
+    )
+
+    if not created:
+        carrito_item.cantidad += 1  
+        carrito_item.save()
+
+    return redirect('carrito')  
+
+def eliminar_producto(request, id):
+    if request.user.is_authenticated:
+        item = Carrito.objects.get(id=id, user=request.user)
+        item.delete()
+    return redirect('carrito')  
+
+def actualizar_cantidad(request, id):
+    if request.method == "POST":
+        nueva_cantidad = request.POST.get('cantidad')
+        item = Carrito.objects.get(id=id, user=request.user)
+        item.cantidad = nueva_cantidad
+        item.save()
+    return redirect('carrito') 
+
+def navbar_context(request):
+    total_items = Carrito.objects.filter(user=request.user).aggregate(Sum('cantidad'))['cantidad__sum'] or 0
+    return {'total_items': total_items}

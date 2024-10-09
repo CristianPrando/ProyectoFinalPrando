@@ -11,11 +11,10 @@
 
 {% block cambios1 %}
   
-<br>
-<h1>Lista de amigurumis</h1>
+<!-- <br>
 
 <ul>
-    
+
     {% for amigurumi in amigurumis %}
       <li>
         <img src="{{amigurumi.imagen.url}}" alt="{{amigurumis.nombre}}" style="width: 100px; height: auto;">
@@ -30,11 +29,33 @@
         </button>
       </div>
     {% endfor %}
-      
-  </ul>
-  <br>
-  <a href="{% url 'inicio' %}">Ir al inicio</a>
-  <a href="{% url 'creaamigurumi' %}">Crea amigurumi</a>
-  <br><br><br>
   
-  {% endblock cambios1 %}
+</ul>
+<br>
+<a href="{% url 'inicio' %}">Ir al inicio</a>
+<a href="{% url 'creaamigurumi' %}">Crea amigurumi</a>
+<br><br><br> -->
+
+<ul style="list-style-type: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px;">
+  {% for amigurumi in amigurumis %}
+    <li style="flex: 0 1 calc(30% - 10px); margin-left: 35px; margin-top: 30px;"> 
+      <div style="border: 3px solid #f3b1b1; border-radius: 5px; padding: 20px; background-color: #ffe6f2; text-align: center;">
+        <img src="{{ amigurumi.imagen.url }}" alt="{{ amigurumi.nombre }}" style="width: 200px; height: auto;">
+        <br>
+        <strong>{{ amigurumi }}</strong> - 
+        <br>
+        <strong>Precio: {{ amigurumi.precio }}</strong>
+        <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+          <button style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
+            <a href="{% url 'actualizaamigurumi' amigurumi.id %}" style="text-decoration: none; color: white;">Actualizar</a>
+          </button>
+          <button style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
+            <a href="{% url 'eliminaramigurumi' amigurumi.id %}" style="text-decoration: none; color: white;">Eliminar</a>
+          </button>
+        </div>
+      </div>
+    </li>
+  {% endfor %}
+</ul>
+
+ {% endblock cambios1 %}
