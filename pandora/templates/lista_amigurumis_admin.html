@@ -4,37 +4,13 @@
 
 {% block cambioencabezado %}
 
-          <h1 class="display-4 fw-bolder">Panel de administrador</h1>
+          <h1 class="display-4 fw-bolder" style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a05050;">Panel de administrador</h1>
           <p class="lead fw-normal text-black-50 mb-0">Elija a continuación las acciones a realizar</p>
       
 {% endblock cambioencabezado %}
 
 {% block cambios1 %}
-  
-<!-- <br>
 
-<ul>
-
-    {% for amigurumi in amigurumis %}
-      <li>
-        <img src="{{amigurumi.imagen.url}}" alt="{{amigurumis.nombre}}" style="width: 100px; height: auto;">
-        {{ amigurumi }}
-      </li>
-      <div style="display: flex; column-gap: 5px;">
-        <button>
-          <a href="{% url 'actualizaamigurumi' amigurumi.id %}">Actualizar</a>
-        </button>
-        <button>
-          <a href="{% url 'eliminaramigurumi' amigurumi.id %}">Eliminar</a>
-        </button>
-      </div>
-    {% endfor %}
-  
-</ul>
-<br>
-<a href="{% url 'inicio' %}">Ir al inicio</a>
-<a href="{% url 'creaamigurumi' %}">Crea amigurumi</a>
-<br><br><br> -->
 
 <ul style="list-style-type: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px;">
   {% for amigurumi in amigurumis %}

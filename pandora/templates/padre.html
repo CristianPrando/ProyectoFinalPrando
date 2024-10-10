@@ -1,252 +1,161 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        {% load static %}
+<head>
+    {% load static %}
 
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Pandora Tejidos</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-    </head>
-    <body>
-        
-        {% include 'navbar.html' %}
-        
-        
-        <header class="bg-dark py-5" style="background-image: url('/media/Prueba.png'); background-size: cover; background-position: center;">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-left text-black">
-                    {% block cambioencabezado %}
-                    <h1 class="display-4 fw-bolder">Pandora Tejidos!</h1>
-                    <p class="lead fw-normal text-black-50 mb-0">Hecho con amor!</p>
-                    {% endblock cambioencabezado %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Pandora Tejidos</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <style>
+        .collage-container {
+            position: relative;
+            width: 100%;
+            height: 300px; /* Ajusta la altura según sea necesario */
+            margin: 20px 0;
+            background-color: #fce4ec;
+            border-radius: 10px;
+            display: flex;
+            padding: 20px; /* Añadir padding para el texto */
+            box-sizing: border-box; /* Asegurar que el padding no afecte el tamaño */
+        }
+        .collage {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: flex-start; /* Alinear las imágenes hacia arriba */
+        }
+        .collage img {
+            position: relative;
+            width: 180px; /* Ajusta el tamaño según sea necesario */
+            border-radius: 10px;
+            margin-left: -20px; /* Alineación a la izquierda */
+            transition: transform 0.3s;
+        }
+        .collage img:nth-child(1) {
+            top: 120px;
+            left: 0;
+            transform: rotate(-40deg);
+        }
+        .collage img:nth-child(2) {
+            top: 28px;
+            left: -28px;
+            transform: rotate(-20deg);
+        }
+        .collage img:nth-child(3) {
+            top: -20px;
+            left: -15px;
+            transform: rotate(-8deg);
+        }
+        .collage img:hover {
+            transform: scale(1.1); /* Efecto de hover para agrandar la imagen */
+        }
+        .text {
+            padding-left: 20px;
+            color: #880e4f;
+            flex: 1;
+        }
+        .bottom-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .bottom-text {
+            flex: 1;
+            padding: 20px;
+            color: #880e4f;
+        }
+        .bottom-images {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .bottom-images img {
+            width: 100%;
+            max-width: 150px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    {% include 'navbar.html' %}
+    {% block cambiossitioconstruccion %}
+    
+    <header class="bg-dark py-5" style="background-image: url('/media/fotosestaticas/BannerPrincipal2.png'); background-size: cover; background-position: center;">
+        <div class="container px-4 px-lg-5 my-5" style="width: 100%; height: 90%;">
+            <div class="text-left text-black">
+                {% block cambioencabezado %}
+                <h1 class="display-4 fw-bolder" style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a05050;">Pandora Tejidos!</h1>
+                <p class="lead fw-normal text-black-50 mb-0">Hecho con amor!</p>
+                {% endblock cambioencabezado %}
+            </div>
+        </div>
+    </header>
+    <!-- Header-->
+     
+    {% endblock cambiossitioconstruccion %}
+
+    {% block cambios1 %}
+    <!-- Section-->
+    <div class="text-right" style="margin-top: 20px;">
+        <form action="{% url 'busqueda_amigurumi' %}" method="get" style="display: inline;">
+            <input type="text" name="categoria" placeholder="Buscar amigurumi..." style="padding: 5px;">
+            <button type="submit" style="padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 4px;">Buscar amigurumi por categoría (Animales, Personajes, Muñecas)</button>
+        </form>
+    </div>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="collage-container">
+                <div class="collage">
+                    <img src="/media/fotosestaticas/Dragoncito dormilón Bratt.png" alt="Foto 1">
+                    <img src="/media/fotosestaticas/Muñeca Candy.png" alt="Foto 2">
+                    <img src="/media/fotosestaticas/Llamita Lara.png" alt="Foto 3">
+                </div>
+                <div class="text">
+                    <h2>Un lugar para encontrar tu muñeco ideal!</h2>
+                    <p>Todo lo que encuentres en esta página esta hecho con las manos y con mucho amor. <br>
+                    Nos encanta tejer amigos inseparables para los más peques y recuerdos para los más grandes. <br>
+                    Todos son bienvenidos aquí, pase y vea.</p>
                 </div>
             </div>
-        </header>
-        <!-- Header-->
-
-        {% block cambios1 %}
-        <!-- Section-->
-         
-            
-         
-         <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Fancy Product</h5>
-                                    <!-- Product price-->
-                                    $40.00 - $80.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Special Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$20.00</span>
-                                    $18.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Sale Item</h5>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$50.00</span>
-                                    $25.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Popular Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    $40.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Sale Item</h5>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$50.00</span>
-                                    $25.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Fancy Product</h5>
-                                    <!-- Product price-->
-                                    $120.00 - $280.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Special Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">$20.00</span>
-                                    $18.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Popular Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    $40.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            </div>
-                        </div>
-                    </div>
+            <br>
+            <br>
+            <br>
+            <div class="bottom-container">
+                <div class="bottom-text">
+                    <h2>Proximamente!</h2>
+                    <p>Estamos incorporando muchas más cositas a nuestra web, pronto estarán dispoibles para que puedas crear tus propios momentos mágicos!</p>
+                </div>
+                <div class="bottom-images">
+                    <img src="/media/fotosestaticas/Hilos algodon.jpg" alt="Foto 4">
+                    <img src="/media/fotosestaticas/Sweter Crochet.jpeg" alt="Foto 5">
                 </div>
             </div>
-        </section>
-        {% endblock cambios1 %}
-        <!-- Footer-->
-        <footer class="py-2 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <!-- Aquí sigue tu código de productos -->
+            </div>
+        </div>
+    </section>
+    {% endblock cambios1 %}
+    <!-- Footer-->
+    <footer class="py-2 bg-dark">
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
 </html>

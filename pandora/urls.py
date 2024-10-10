@@ -42,6 +42,9 @@ urlpatterns = [
     path('agregar_al_carrito/<int:amigurumi_id>/', agregar_al_carrito, name='agregar_al_carrito'),
     path('carrito/eliminar/<int:id>/', eliminar_producto, name='eliminar_producto'),
     path('carrito/actualizar/<int:id>/', actualizar_cantidad, name='actualizar_cantidad'),
+    path('ropa', ropa, name='ropa'),
+    path('insumos', insumos, name='insumos'),
+    path('busqueda-amigurumi', busqueda_amigurumi, name='busqueda_amigurumi'),
 ]
 
 urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -1,10 +1,17 @@
 {% extends 'padre.html' %}
 
+{% block cambioencabezado %}
+    <h1 class="display-4 fw-bolder" style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a05050;">Hasta pronto!</h1>
+    <p class="lead fw-normal text-black-50 mb-0">Esperamos que hayas tenido una experiencia agradable</p>
+{% endblock cambioencabezado %}
 
 {% block cambios1 %}
 <br>
-<h1>Sesión cerrada con éxito, gracias por tu visita!</h1>
-
-<a href="{% url 'inicio' %}">Volver al inicio</a>
+<h3 style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #cb8383;" class="text-center">
+    <br><br> Sesión cerrada con éxito. <br> Gracias por su visita<br><br>
+</h3>
+<div class="text-center">
+    <a href="{% url 'inicio' %}">Volver al inicio</a>
+</div>
 <br><br><br><br>
 {% endblock cambios1 %}

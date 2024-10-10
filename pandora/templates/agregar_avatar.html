@@ -4,21 +4,26 @@
 
 {% block cambioencabezado %}
 
-          <h1 class="display-4 fw-bolder">Agregar Avatar</h1>
+          <h1 class="display-4 fw-bolder">Avatar</h1>
           <p class="lead fw-normal text-black-50 mb-0">Cree o actualice su avatar a continuacion</p>
       
 {% endblock cambioencabezado %}
 
 {% block cambios1 %}
-  
-<form action="{% url 'AgregarAvatar' %}" enctype="multipart/form-data" method="post">{% csrf_token %}
+<div style="display: flex; justify-content: space-between; align-items: flex-start;"></div>
+  <div style="flex: 1; border: 3px solid #f3b1b1; margin-top: 35px; margin-left: 100px; margin-right: 100px; margin-bottom: 100px; border-radius: 5px;">
+    <h3 style="color: rgb(232, 144, 144);">Si es tu primera vez, puede crear un avatar</h3>  
+    <form action="{% url 'AgregarAvatar' %}" enctype="multipart/form-data" method="post">{% csrf_token %}
 
-    {{mi_formulario.as_p}}
+        {{mi_formulario.as_p}}
 
-    <button type="submit">Agregar</button>
+        <button type="submit">Agregar</button>
 
-</form>
-      
+    </form>
+  </div>
+  <div style="flex: 1; border: 3px solid #f3b1b1; margin-top: 35px; margin-left: 100px; margin-right: 100px; margin-bottom: 100px; padding: 15px; border-radius: 5px;">
+    <h3 style="color: rgb(232, 144, 144);">Si ya tienes un avatar puedes actualizarlo aquí!</h3>  
+  </div>
+</div>
 
-  
   {% endblock cambios1 %}

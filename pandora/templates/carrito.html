@@ -4,7 +4,7 @@
 
 {% block cambioencabezado %}
 
-          <h1 class="display-4 fw-bolder">Carrito de comprar</h1>
+          <h1 class="display-4 fw-bolder" style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a05050;">Carrito de compras</h1>
           <p class="lead fw-normal text-black-50 mb-0">Elija a continuación las acciones a realizar</p>
       
 {% endblock cambioencabezado %}
@@ -12,10 +12,10 @@
 {% block cambios1 %}
 
 
-<ul style="list-style-type: none; padding: 0;">
+<ul style="list-style-type: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px;">
     {% for item in carrito_items %}
-    <li style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-        <div style="display: flex; align-items: center;">
+    <li style="flex: 0 1 calc(25% - 10px); margin-left: 35px; margin-top: 30px;"> 
+        <div style="border: 3px solid #f3b1b1; border-radius: 5px; padding: 20px; background-color: #ffe6f2; text-align: center;">
             <img src="{{ item.amigurumi.imagen.url }}" alt="{{ item.amigurumi.nombre }}" style="width: 100px; height: auto; margin-right: 10px;">
             <div>
                 <h2>{{ item.amigurumi.nombre }}</h2>
@@ -26,7 +26,7 @@
                     {% csrf_token %}
                     <button type="submit">Eliminar</button>
                 </form>
-
+                <br>
                 <form action="{% url 'actualizar_cantidad' item.id %}" method="post">
                     {% csrf_token %}
                     <input type="number" name="cantidad" value="{{ item.cantidad }}" min="1">
@@ -39,7 +39,12 @@
     <li>No hay productos en el carrito.</li>
     {% endfor %}
 </ul>
-
-<h3>Total: {{ total }}</h3>
-<a href="{% url 'inicio' %}">Volver al inicio</a>
+<ul style="list-style-type: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px;">
+    <li style="flex: 0 1 calc(25% - 10px); margin-left: 35px; margin-top: 30px;"> 
+        <div style="border: 3px solid #f3b1b1; border-radius: 5px; padding: 20px; background-color: #ffe6f2; text-align: center;">
+            <h3>Total: {{ total }}</h3>
+        </div>
+    </li>
+</ul>
+<a href="{% url 'listaamigurumis' %}">Seguir comprando</a>
 {% endblock cambios1 %}

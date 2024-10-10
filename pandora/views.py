@@ -14,7 +14,11 @@ import os
 # Create your views here.
 
 def inicio(req):
-    return render(req, 'inicio.html')
+  try:
+    avatar = Avatar.objects.get(user=req.user.id)
+    return render(req, 'inicio.html', {'url': avatar.imagen.url})
+  except:
+    return render(req, 'inicio.html', {})
 
 def sobrenosotros(req):
   return render(req, 'sobrenosotros.html')
@@ -149,33 +153,7 @@ def editar_perfil(req):
     return render(req, "editar_perfil.html", { "mi_formulario": mi_formulario })  
   
 
-@login_required()
-def editar_perfil(req):
 
-  usuario = req.user
-
-  if req.method == 'POST':
-    
-    mi_formulario= UserEditForm(req.POST, instance=req.user)
-    if mi_formulario.is_valid():
-
-      data = mi_formulario.cleaned_data
-      usuario.first_name = data['first_name']
-      usuario.last_name = data['last_name']
-      usuario.email = data['email']
-      usuario.set_password(data["password1"])
-      usuario.save()
-
-      return render(req, "inicio.html", { "mensaje": f"Datos actualizados exitosamente!"})
-
-    else:
-      return render(req, "editar_perfil.html", { "mi_formulario": mi_formulario })    
-
-  else:
-
-    mi_formulario = UserEditForm(instance=req.user)
-    return render(req, "editar_perfil.html", { "mi_formulario": mi_formulario })  
-  
 def agregar_avatar(req):
 
   if req.method == 'POST':
@@ -197,14 +175,13 @@ def agregar_avatar(req):
     mi_formulario = AvatarFormulario()
     return render(req, "agregar_avatar.html", { "mi_formulario": mi_formulario })
   
-def carrito_view(request):
-    # Asegúrate de que el usuario esté autenticado
-    if request.user.is_authenticated:
-        carrito_items = Carrito.objects.filter(user=request.user)
+def carrito_view(req):
+    if req.user.is_authenticated:
+        carrito_items = Carrito.objects.filter(user=req.user)
         total = sum(item.amigurumi.precio * item.cantidad for item in carrito_items)
-        return render(request, 'carrito.html', {'carrito_items': carrito_items, 'total': total})
+        return render(req, 'carrito.html', {'carrito_items': carrito_items, 'total': total})
     else:
-        return redirect('Login')  # Redirige al usuario si no está autenticado
+        return redirect('Login') 
 
 def agregar_al_carrito(req, amigurumi_id):
     if not req.user.is_authenticated:
@@ -223,20 +200,33 @@ def agregar_al_carrito(req, amigurumi_id):
 
     return redirect('carrito')  
 
-def eliminar_producto(request, id):
-    if request.user.is_authenticated:
-        item = Carrito.objects.get(id=id, user=request.user)
+def eliminar_producto(req, id):
+    if req.user.is_authenticated:
+        item = Carrito.objects.get(id=id, user=req.user)
         item.delete()
     return redirect('carrito')  
 
-def actualizar_cantidad(request, id):
-    if request.method == "POST":
-        nueva_cantidad = request.POST.get('cantidad')
-        item = Carrito.objects.get(id=id, user=request.user)
+def actualizar_cantidad(req, id):
+    if req.method == "POST":
+        nueva_cantidad = req.POST.get('cantidad')
+        item = Carrito.objects.get(id=id, user=req.user)
         item.cantidad = nueva_cantidad
         item.save()
     return redirect('carrito') 
 
-def navbar_context(request):
-    total_items = Carrito.objects.filter(user=request.user).aggregate(Sum('cantidad'))['cantidad__sum'] or 0
+def navbar_context(req):
+    total_items = Carrito.objects.filter(user=req.user).aggregate(Sum('cantidad'))['cantidad__sum'] or 0
     return {'total_items': total_items}
+
+def ropa(req):
+   return render(req, 'ropa.html')
+
+def insumos(req):
+   return render(req, 'insumos.html')
+
+def busqueda_amigurumi(req):
+    nombre = req.GET.get("categoria")  
+
+    amigurumis = Amigurumis.objects.filter(categoria__icontains=nombre)
+
+    return render(req, "resultado_busqueda.html", { "amigurumis": amigurumis, "nombre": nombre })
