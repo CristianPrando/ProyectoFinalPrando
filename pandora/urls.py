@@ -42,6 +42,7 @@ urlpatterns = [
     path('agregar_al_carrito/<int:amigurumi_id>/', agregar_al_carrito, name='agregar_al_carrito'),
     path('carrito/eliminar/<int:id>/', eliminar_producto, name='eliminar_producto'),
     path('carrito/actualizar/<int:id>/', actualizar_cantidad, name='actualizar_cantidad'),
+    path('finalizar-pedido/', finalizar_pedido, name='finalizar_pedido'),
     path('ropa', ropa, name='ropa'),
     path('insumos', insumos, name='insumos'),
     path('busqueda-amigurumi', busqueda_amigurumi, name='busqueda_amigurumi'),

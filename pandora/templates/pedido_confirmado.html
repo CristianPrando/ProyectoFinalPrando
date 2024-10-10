@@ -1,0 +1,12 @@
+{% extends 'padre.html' %}
+
+{% block cambioencabezado %}
+<h1>Pedido Confirmado</h1>
+{% endblock cambioencabezado %}
+
+{% block cambios1 %}
+<p>Tu pedido ha sido realizado con éxito. El total es: {{ total }}</p>
+<p>En breve te enviaremos los datos para que puedas realizar el pago y comenzaremos a armar tu pedido.</p>
+<p>Si no ves el mail en la bandeja de entrada, no olvides revisar la carpeta spam.</p>
+<p>Gracias por tu compra!</p>
+{% endblock cambios1 %}

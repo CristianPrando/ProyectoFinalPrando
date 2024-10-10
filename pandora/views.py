@@ -10,6 +10,8 @@ from .forms import CustomUserCreationForm, UserEditForm, AvatarFormulario
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
 from django.urls import reverse_lazy
+from django.core.mail import send_mail
+from django.conf import settings
 import os
 # Create your views here.
 
@@ -230,3 +232,57 @@ def busqueda_amigurumi(req):
     amigurumis = Amigurumis.objects.filter(categoria__icontains=nombre)
 
     return render(req, "resultado_busqueda.html", { "amigurumis": amigurumis, "nombre": nombre })
+
+@login_required
+def finalizar_pedido(request):
+    carrito_items = Carrito.objects.filter(user=request.user)
+
+    if not carrito_items.exists():
+        return redirect('carrito')
+
+    detalles = []
+    total = 0
+
+    for item in carrito_items:
+        amigurumi = item.amigurumi
+        cantidad = item.cantidad
+        precio = amigurumi.precio * cantidad
+        total += precio
+        
+        detalles.append(f"{amigurumi.nombre} - Cantidad: {cantidad} - Precio: {precio}")
+
+    # Mensaje para el cliente
+    mensaje_cliente = f"Gracias por tu compra!\n\nDetalles de tu pedido:\n\n" + "\n".join(detalles) + f"\n\nTotal: {total}. \n El cbu para realizar el pago es: xxxxxxxxxxxxxxxxx. \n Luego de efectuar el pago, envia el comporbante a tejidospandora@gmail.com para que podamos comenzar a preparar el pedido."
+
+    # Mensaje para el administrador
+    mensaje_admin = f"Nueva orden recibida:\n\n" + "\n".join(detalles) + f"\n\nTotal: {total}\n\nCliente: {request.user.email}"
+
+    destinatario_cliente = request.user.email  # Email del cliente
+    destinatario_admin = 'tejidospandora@gmail.com'  # Cambia esto a tu email
+    remitente = settings.EMAIL_HOST_USER  # Tu email como remitente
+
+    try:
+        # Enviar correo al cliente
+        send_mail(
+            'Confirmación de Pedido',
+            mensaje_cliente,
+            remitente,
+            [destinatario_cliente],
+            fail_silently=False,
+        )
+        
+        # Enviar correo al administrador
+        send_mail(
+            'Nueva Orden Recibida',
+            mensaje_admin,
+            remitente,
+            [destinatario_admin],
+            fail_silently=False,
+        )
+    except Exception as e:
+        print(f"Error al enviar el correo: {e}")
+        return redirect('carrito')  # Redirigir si hay un error en el envío del correo
+
+    carrito_items.delete()  # Vaciar el carrito
+
+    return render(request, 'pedido_confirmado.html', {'total': total})
