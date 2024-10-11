@@ -1,14 +1,14 @@
 {% extends 'padre.html' %}
 
 {% block cambios1 %}
-  
+<div style="flex: 1; max-width: 500px; margin: 0 auto; border: 3px solid #f3b1b1; padding: 20px; border-radius: 5px; margin-top: 20px;">
   <form action="{% url 'editarperfil' %}" method="post">{% csrf_token %}
 
     {{mi_formulario.as_p}}
 
-    <button type="submit">Actualizar</button>
+    <button type="submit" style="margin-bottom: 10px; background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">Actualizar</button>
 
   </form>
   
-  <a href="{% url 'AgregarAvatar' %}">Agregar/actualizar avatar</a>
+</div>
 {% endblock cambios1 %}

@@ -1,12 +1,21 @@
 {% extends 'padre.html' %}
 
 {% block cambioencabezado %}
-<h1>Pedido Confirmado</h1>
+        <h1 class="display-4 fw-bolder" style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a05050;">Pedido confirmado!</h1>
+        <p class="lead fw-normal text-black-50 mb-0">Esperamos que hayas tenido un agradable proceso de compra.</p>
 {% endblock cambioencabezado %}
 
 {% block cambios1 %}
-<p>Tu pedido ha sido realizado con éxito. El total es: {{ total }}</p>
-<p>En breve te enviaremos los datos para que puedas realizar el pago y comenzaremos a armar tu pedido.</p>
-<p>Si no ves el mail en la bandeja de entrada, no olvides revisar la carpeta spam.</p>
-<p>Gracias por tu compra!</p>
+<ul style="flex: 0 1 calc(25% - 10px); margin-left: 100px; margin-top: 30px; margin-right: 100px;"> 
+    <div style="border: 3px solid #f3b1b1; border-radius: 5px; padding: 20px; background-color: #ffe6f2; text-align: center; position: relative;">
+        <img src="/media/fotosestaticas/Confeti.png" alt="Confeti" style="position: absolute; top: 10px; left: 10px; width: 100px; height: auto;">
+        <img src="/media/fotosestaticas/ConfetiDer.png" alt="Confeti" style="position: absolute; top: 10px; right: 10px; width: 100px; height: auto;">
+        <p style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a05050;">Tu pedido ha sido realizado con éxito. El total es: <strong>{{ total }}</strong></p>
+        <p style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a05050;">En breve te enviaremos los datos para que puedas realizar el pago y comenzaremos a armar tu pedido.</p>
+        <p style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a05050;">Si no ves el mail en la bandeja de entrada, no olvides revisar la carpeta spam.</p>
+        <p style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a05050;"><strong>Gracias por tu compra!</strong></p>
+    </div>
+</ul>
+<br>
+<br>
 {% endblock cambios1 %}

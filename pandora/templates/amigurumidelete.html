@@ -2,22 +2,28 @@
 
 {% block cambioencabezado %}
 
-          <p class="display-4 fw-bolder">Está seguro? <p>
-          <p class="lead fw-normal text-black-50 mb-0">Desea eliminar registro? </p>
+<h6 class="display-4 fw-bolder" style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a05050;">
+  Está seguro?
+</h6>
+<p class="lead fw-normal text-black-50 mb-0">.</p>
       
 {% endblock cambioencabezado %}
 
 {% block cambios1 %}
-  <h2>{{ amigurumi.nombre }}</h2>
+<br>
+<div style="border: 3px solid #f3b1b1; border-radius: 5px; padding: 20px; background-color: #ffe6f2; text-align: center; margin-left: 400px; margin-right: 400px; margin-bottom: 30px;">
+  <img src="{{ amigurumi.imagen.url }}" alt="{{ amigurumi.nombre }}" style="width: 200px; height: auto;" class="text-decoration">
+  <h2 style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a65454;" class="text-center">Amigurumi: {{ amigurumi.nombre }}</h2>
   <form action="{% url 'eliminaramigurumi' amigurumi.id %}" method="post">{% csrf_token %}
 
-    <p>Elija a continuación la opción deseada:</p>
+    <p style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a65454;" class="text-center">Confirme que acción desea realizar:</p>
     
     <form action="{% url 'eliminacionexitosa' %}" method="post">
-      <button type="submit">Confirmar</button>
+      <button style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">Eliminar</button>
     </form>
-    <button><a href="{% url 'listaamigurumisadmin' %}">Cancelar</a></button>
+    <br>
+    <button style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;"><a href="{% url 'listaamigurumisadmin' %}" style="text-decoration: none; color: rgb(255, 255, 255);">Cancelar</a></button>
 
   </form>
-  
+</div>
 {% endblock cambios1 %}

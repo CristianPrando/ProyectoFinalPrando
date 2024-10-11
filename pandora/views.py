@@ -251,18 +251,15 @@ def finalizar_pedido(request):
         
         detalles.append(f"{amigurumi.nombre} - Cantidad: {cantidad} - Precio: {precio}")
 
-    # Mensaje para el cliente
     mensaje_cliente = f"Gracias por tu compra!\n\nDetalles de tu pedido:\n\n" + "\n".join(detalles) + f"\n\nTotal: {total}. \n El cbu para realizar el pago es: xxxxxxxxxxxxxxxxx. \n Luego de efectuar el pago, envia el comporbante a tejidospandora@gmail.com para que podamos comenzar a preparar el pedido."
 
-    # Mensaje para el administrador
     mensaje_admin = f"Nueva orden recibida:\n\n" + "\n".join(detalles) + f"\n\nTotal: {total}\n\nCliente: {request.user.email}"
 
-    destinatario_cliente = request.user.email  # Email del cliente
-    destinatario_admin = 'tejidospandora@gmail.com'  # Cambia esto a tu email
-    remitente = settings.EMAIL_HOST_USER  # Tu email como remitente
+    destinatario_cliente = request.user.email  
+    destinatario_admin = 'tejidospandora@gmail.com'  
+    remitente = settings.EMAIL_HOST_USER  
 
     try:
-        # Enviar correo al cliente
         send_mail(
             'Confirmación de Pedido',
             mensaje_cliente,
@@ -271,7 +268,6 @@ def finalizar_pedido(request):
             fail_silently=False,
         )
         
-        # Enviar correo al administrador
         send_mail(
             'Nueva Orden Recibida',
             mensaje_admin,
@@ -281,8 +277,8 @@ def finalizar_pedido(request):
         )
     except Exception as e:
         print(f"Error al enviar el correo: {e}")
-        return redirect('carrito')  # Redirigir si hay un error en el envío del correo
+        return redirect('carrito')  
 
-    carrito_items.delete()  # Vaciar el carrito
+    carrito_items.delete()  
 
     return render(request, 'pedido_confirmado.html', {'total': total})

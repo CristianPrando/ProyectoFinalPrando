@@ -27,21 +27,21 @@
                         <p class="nav-link mb-0">Bienvenido/a {{ user.username }}</p>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mi cuenta</a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-top: 2px;">Mi cuenta</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">Ver Perfil</a></li>
+                            <!-- <li><a class="dropdown-item" href="#!">Ver Perfil</a></li> -->
                             <li><a class="dropdown-item" href="{% url 'editarperfil' %}">Editar Perfil</a></li>
-                            <li><a class="dropdown-item" href="{% url 'AgregarAvatar' %}">Editar Avatar</a></li>
+                            <li><a class="dropdown-item" href="{% url 'AgregarAvatar' %}">Crear Avatar</a></li>
                         </ul>
                     </li>
                     {% endif %}
                     {% if user.is_superuser %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'creaamigurumi' %}">Nuevo Producto</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'listaamigurumisadmin' %}">Editar Producto</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'creaamigurumi' %}" style="margin-top: 1px;">Nuevo Producto</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'listaamigurumisadmin' %}" style="margin-top: 1px;">Editar Producto</a></li>
                     {% endif %}
                     <li class="nav-item">
                         <form action="{% url 'Logout' %}" method="post" class="d-flex align-items-center">{% csrf_token %}
-                            <button class="btn btn-link nav-link" type="submit">Cerrar sesión</button>
+                            <button class="btn btn-link nav-link" type="submit" style="margin-top: 0px;">Cerrar sesión</button>
                         </form>
                     </li>
                 </ul>

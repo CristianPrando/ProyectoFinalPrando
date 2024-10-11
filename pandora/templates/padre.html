@@ -108,10 +108,10 @@
 
     {% block cambios1 %}
     <!-- Section-->
-    <div class="text-right" style="margin-top: 20px;">
+    <div class="text-right" style="margin-top: 10px; margin-left: 1100px;">
         <form action="{% url 'busqueda_amigurumi' %}" method="get" style="display: inline;">
-            <input type="text" name="categoria" placeholder="Buscar amigurumi..." style="padding: 5px;">
-            <button type="submit" style="padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 4px;">Buscar amigurumi por categoría (Animales, Personajes, Muñecas)</button>
+            <input type="text" name="categoria" placeholder="Buscar amigurumi..." style="padding: 5px; margin-left: 20px;">
+            <button type="submit" style="padding: 5px 10px; background-color: #f89393; color: white; border: none; border-radius: 4px;">Buscar por categoría (Animales, Personajes, Muñecas)</button>
         </form>
     </div>
     <section class="py-5">
@@ -143,9 +143,7 @@
                 </div>
             </div>
 
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <!-- Aquí sigue tu código de productos -->
-            </div>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"></div>
         </div>
     </section>
     {% endblock cambios1 %}

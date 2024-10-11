@@ -4,25 +4,24 @@
 
 {% block cambioencabezado %}
 
-          <h1 class="display-4 fw-bolder">Avatar</h1>
-          <p class="lead fw-normal text-black-50 mb-0">Cree o actualice su avatar a continuacion</p>
+          <h1 class="display-4 fw-bolder" style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a05050;">Avatar</h1>
+          <p class="lead fw-normal text-black-50 mb-0">Creelo aquí!</p>
       
 {% endblock cambioencabezado %}
 
 {% block cambios1 %}
 <div style="display: flex; justify-content: space-between; align-items: flex-start;"></div>
   <div style="flex: 1; border: 3px solid #f3b1b1; margin-top: 35px; margin-left: 100px; margin-right: 100px; margin-bottom: 100px; border-radius: 5px;">
-    <h3 style="color: rgb(232, 144, 144);">Si es tu primera vez, puede crear un avatar</h3>  
-    <form action="{% url 'AgregarAvatar' %}" enctype="multipart/form-data" method="post">{% csrf_token %}
+    <h3 style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #bf5e5e; margin-left: 10px;">Si es tu primera vez, puedes crear un avatar</h3>  
+    <form action="{% url 'AgregarAvatar' %}" enctype="multipart/form-data" method="post" style="margin-left: 10px; color: #a24747;">{% csrf_token %}
 
         {{mi_formulario.as_p}}
 
-        <button type="submit">Agregar</button>
+        <button type="submit" style="margin-bottom: 10px; background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
+          Agregar
+        </button>
 
     </form>
-  </div>
-  <div style="flex: 1; border: 3px solid #f3b1b1; margin-top: 35px; margin-left: 100px; margin-right: 100px; margin-bottom: 100px; padding: 15px; border-radius: 5px;">
-    <h3 style="color: rgb(232, 144, 144);">Si ya tienes un avatar puedes actualizarlo aquí!</h3>  
   </div>
 </div>
 
