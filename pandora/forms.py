@@ -50,3 +50,10 @@ class AvatarFormulario(forms.ModelForm):
   class Meta:
     model=Avatar
     fields=('imagen',)
+
+
+class ContactoFormulario(forms.Form):
+    nombre = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    telefono = forms.CharField(max_length=15, required=False)
+    mensaje = forms.CharField(widget=forms.Textarea)

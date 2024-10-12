@@ -46,6 +46,7 @@ urlpatterns = [
     path('ropa', ropa, name='ropa'),
     path('insumos', insumos, name='insumos'),
     path('busqueda-amigurumi', busqueda_amigurumi, name='busqueda_amigurumi'),
+    path('contacto/', contacto, name='contacto'),
 ]
 
 urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

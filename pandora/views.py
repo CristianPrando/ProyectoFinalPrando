@@ -6,7 +6,7 @@ from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserCreationForm, UserEditForm, AvatarFormulario
+from .forms import CustomUserCreationForm, UserEditForm, AvatarFormulario, ContactoFormulario
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
 from django.urls import reverse_lazy
@@ -234,8 +234,8 @@ def busqueda_amigurumi(req):
     return render(req, "resultado_busqueda.html", { "amigurumis": amigurumis, "nombre": nombre })
 
 @login_required
-def finalizar_pedido(request):
-    carrito_items = Carrito.objects.filter(user=request.user)
+def finalizar_pedido(req):
+    carrito_items = Carrito.objects.filter(user=req.user)
 
     if not carrito_items.exists():
         return redirect('carrito')
@@ -253,9 +253,9 @@ def finalizar_pedido(request):
 
     mensaje_cliente = f"Gracias por tu compra!\n\nDetalles de tu pedido:\n\n" + "\n".join(detalles) + f"\n\nTotal: {total}. \n El cbu para realizar el pago es: xxxxxxxxxxxxxxxxx. \n Luego de efectuar el pago, envia el comporbante a tejidospandora@gmail.com para que podamos comenzar a preparar el pedido."
 
-    mensaje_admin = f"Nueva orden recibida:\n\n" + "\n".join(detalles) + f"\n\nTotal: {total}\n\nCliente: {request.user.email}"
+    mensaje_admin = f"Nueva orden recibida:\n\n" + "\n".join(detalles) + f"\n\nTotal: {total}\n\nCliente: {req.user.email}"
 
-    destinatario_cliente = request.user.email  
+    destinatario_cliente = req.user.email  
     destinatario_admin = 'tejidospandora@gmail.com'  
     remitente = settings.EMAIL_HOST_USER  
 
@@ -281,4 +281,27 @@ def finalizar_pedido(request):
 
     carrito_items.delete()  
 
-    return render(request, 'pedido_confirmado.html', {'total': total})
+    return render(req, 'pedido_confirmado.html', {'total': total})
+
+def contacto(req):
+    if req.method == 'POST':
+        form = ContactoFormulario(req.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            email = form.cleaned_data['email']
+            telefono = form.cleaned_data['telefono']
+            mensaje = form.cleaned_data['mensaje']
+
+            cuerpo_mensaje = f"Nombre: {nombre}\nEmail: {email}\nTeléfono: {telefono}\n\nMensaje:\n{mensaje}"
+
+            send_mail(
+                f'Mensaje de {nombre}',
+                cuerpo_mensaje,
+                email,
+                ['tejidospandora@gmail.com'],  
+            )
+            return render(req, 'contactoexitoso.html')  
+    else:
+        form = ContactoFormulario()
+
+    return render(req, 'contacto.html', {'form': form})

@@ -1,0 +1,23 @@
+{% extends 'padre.html' %}
+
+{% block cambioencabezado %}
+
+          <h1 class="display-4 fw-bolder" style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a05050;">Contáctanos</h1>
+          <p class="lead fw-normal text-black-50 mb-0">Completa todos los campos para enviarnos tu mensaje.</p>
+      
+{% endblock cambioencabezado %}
+
+
+{% block cambios1 %}
+   
+<div style="flex: 1; max-width: 400px; margin: 0 auto; margin-top: 20px; margin-bottom: 20px; border: 3px solid #f3b1b1; padding: 20px; border-radius: 5px;">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <li><strong>El número de teléfono es opcional</strong></li>
+        <br>
+        <button type="submit">Enviar</button>
+    </form>
+</div>
+
+{% endblock cambios1 %}

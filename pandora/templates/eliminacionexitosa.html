@@ -8,11 +8,19 @@
 {% endblock cambioencabezado %}
 
 {% block cambios1 %}
-<br><br><br>
-<h1>¿Qué desea hacer a continuación?</h1>
 
-<a href="{% url 'inicio' %}">Volver al inicio</a>
-<a href="{% url 'listaamigurumisadmin' %}">Volver a la lista de amigurumis</a>
+<div style="flex: 1; max-width: 400px; margin: 0 auto; margin-top: 20px; margin-bottom: 20px; border: 3px solid #f3b1b1; padding: 20px; border-radius: 5px;">
+    <h1 style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #cb8383;" class="text-center">¿Qué desea hacer a continuación?</h1>
+    <div style="display: flex; gap: 10px; justify-content: center;">
+        <form action="{% url 'inicio' %}" method="get"> 
+            <button style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">Inicio</button>
+        </form>
+        <form action="{% url 'listaamigurumisadmin' %}" method="get"> 
+            <button style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">Volver a la lista</button>
+        </form>
+    </div>
+</div>
+
     
 {% endblock cambios1 %}
     

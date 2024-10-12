@@ -14,7 +14,7 @@
 
     <br><br><br>
     <div style="flex: 1; max-width: 400px; margin: 0 auto; border: 3px solid #f3b1b1; padding: 20px; border-radius: 5px;">
-        <form action="{% url 'Login' %}" method="post" class="text-center">{% csrf_token %}
+        <form action="{% url 'Login' %}" method="post" >{% csrf_token %}
             {{ mi_formulario.as_p }}
             <button type="submit">Iniciar Sesión</button>
         </form>

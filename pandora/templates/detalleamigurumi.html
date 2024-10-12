@@ -1,12 +1,13 @@
 {% extends 'padre.html' %}
 
+
 {% block cambios1 %}
-<h2 style="text-align: center; margin-top: 20px;">Detalle de {{amigurumis.nombre}} </h2>
+<h2 style="text-align: center; margin-top: 20px; font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #cb8383;">Detalle de {{amigurumis.nombre}} </h2>
 
 <div style="flex: 1; max-width: 400px; margin: 0 auto; border: 3px solid #f3b1b1; padding: 20px; border-radius: 5px;">
-  <h4>Nombre: {{amigurumis.nombre}}</h4>
+  <!-- <h4 style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #cb8383;">{{amigurumis.nombre}}</h4> -->
     <h6>
-      <div>
+      <div style="text-align: center;">
         <p>
           <img src="{{ amigurumis.imagen.url }}" alt="{{ amigurumis.nombre }}" style="width: 300px; height: auto; margin-top: 10px;">
           <br><br>
@@ -20,7 +21,7 @@
         </p>
       </div>
     </h6>
-    <button style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
+    <button style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-left: 108px;">
       <a href="{% url 'agregar_al_carrito' amigurumis.id %}" style="text-decoration: none; color: white;">Añadir al carrito</a>
     </button>
 </div>

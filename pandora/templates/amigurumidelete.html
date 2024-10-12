@@ -18,12 +18,13 @@
 
     <p style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a65454;" class="text-center">Confirme que acción desea realizar:</p>
     
-    <form action="{% url 'eliminacionexitosa' %}" method="post">
-      <button style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">Eliminar</button>
-    </form>
-    <br>
-    <button style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;"><a href="{% url 'listaamigurumisadmin' %}" style="text-decoration: none; color: rgb(255, 255, 255);">Cancelar</a></button>
-
-  </form>
+    <div style="display: flex; gap: 20px; margin-left: 155px;">  
+      <form action="{% url 'eliminacionexitosa' %}" method="post">
+          <button style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">Eliminar</button>
+      </form>
+      <form action="{% url 'listaamigurumisadmin' %}" method="get"> 
+          <button style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">Cancelar</button>
+      </form>
+  </div>
 </div>
 {% endblock cambios1 %}

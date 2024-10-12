@@ -10,20 +10,19 @@
 {% endblock cambioencabezado %}
 
 {% block cambios1 %}
-<br><br><br>
-<h3 style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #cb8383;" class="text-center">
-    <br>Su producto ya se encuentra dispoible en la tienda!<br>
-</h3>
-<br>
-<div class="text-center">
-    <a href="{% url 'creaamigurumi' %}">Crear nuevo amigurumi</a>
-    <a href="{% url 'inicio' %}">Volver al inicio</a>
+<div style="flex: 1; max-width: 400px; margin: 0 auto; margin-top: 20px; margin-bottom: 20px; border: 3px solid #f3b1b1; padding: 20px; border-radius: 5px;">
+  <h3 style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #cb8383;" class="text-center">
+      <br>Su producto ya se encuentra disponible en la tienda!<br>
+  </h3>
+  <div style="display: flex; gap: 10px; justify-content: center;">
+    <form action="{% url 'creaamigurumi' %}" method="get"> 
+        <button style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">Nuevo amigurumi</button>
+    </form>
+    <form action="{% url 'inicio' %}" method="get"> 
+        <button style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">Inicio</button>
+    </form>
+  </div>
 </div>
-<br><br>
-<!-- <h1>Su producto ya se encuentra disponibl en la tienda!</h1>
 
-<a href="{% url 'inicio' %}">Volver al inicio</a>
-<a href="{% url 'creaamigurumi' %}">Crear nuevo amigurumi</a> -->
-    
 {% endblock cambios1 %}
     
