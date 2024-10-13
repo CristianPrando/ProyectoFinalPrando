@@ -12,6 +12,7 @@ from django.db.models import Sum
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib import messages
 import os
 # Create your views here.
 
@@ -111,10 +112,9 @@ def login_view(req):
       return render(req, "login.html", { "mi_formulario": mi_formulario })  
   
 def register(req):
-    
     if req.method == "POST":
         mi_formulario = CustomUserCreationForm(req.POST)
-
+        
         if mi_formulario.is_valid():
             mi_formulario.save()
             username = mi_formulario.cleaned_data.get("username")
@@ -122,10 +122,13 @@ def register(req):
             user = authenticate(username=username, password=password)
             login(req, user)
             return redirect("inicio")
-        
+        else:
+            return render(req, "registro.html", {"mi_formulario": mi_formulario})
+
     else:
         mi_formulario = CustomUserCreationForm()
-        return render(req, "registro.html", {"mi_formulario": mi_formulario})
+
+    return render(req, "registro.html", {"mi_formulario": mi_formulario})
     
 @login_required()
 def editar_perfil(req):
@@ -157,26 +160,41 @@ def editar_perfil(req):
 
 
 def agregar_avatar(req):
+    if req.method == 'POST':
+        mi_formulario = AvatarFormulario(req.POST, req.FILES)
+        if mi_formulario.is_valid():
+            data = mi_formulario.cleaned_data
+            
+            avatar, created = Avatar.objects.update_or_create(
+                user=req.user,
+                defaults={'imagen': data["imagen"]}
+            )
 
-  if req.method == 'POST':
-    
-    mi_formulario= AvatarFormulario(req.POST, req.FILES)
-    if mi_formulario.is_valid():
+            mensaje = "Avatar creado correctamente!" if created else "Avatar actualizado correctamente!"
+            return render(req, "inicio.html", {"mensaje": mensaje})
 
-      data = mi_formulario.cleaned_data
-      avatar = Avatar(user=req.user, imagen=data["imagen"])
-      avatar.save()
-
-      return render(req, "inicio.html", { "mensaje": f"Avatar creado correctamente!"})
+        else:
+            return render(req, "agregar_avatar.html", {"mi_formulario": mi_formulario})
 
     else:
-      return render(req, "agregar_avatar.html", { "mi_formulario": mi_formulario })    
-
-  else:
-
-    mi_formulario = AvatarFormulario()
-    return render(req, "agregar_avatar.html", { "mi_formulario": mi_formulario })
+        mi_formulario = AvatarFormulario()
+        
+    return render(req, "agregar_avatar.html", {"mi_formulario": mi_formulario})
   
+def eliminar_avatar(req):
+    if req.method == 'POST':
+        try:
+            avatar = Avatar.objects.get(user=req.user)
+            avatar.delete()  
+            messages.success(req, "Avatar eliminado correctamente!")
+        except Avatar.DoesNotExist:
+            messages.error(req, "No se encontró el avatar.")
+
+    return redirect('inicio')
+
+def confirmar_eliminacion_avatar(req):
+   return render(req, "confirmar_eliminacion_avatar.html")
+
 def carrito_view(req):
     if req.user.is_authenticated:
         carrito_items = Carrito.objects.filter(user=req.user)
@@ -216,9 +234,6 @@ def actualizar_cantidad(req, id):
         item.save()
     return redirect('carrito') 
 
-def navbar_context(req):
-    total_items = Carrito.objects.filter(user=req.user).aggregate(Sum('cantidad'))['cantidad__sum'] or 0
-    return {'total_items': total_items}
 
 def ropa(req):
    return render(req, 'ropa.html')

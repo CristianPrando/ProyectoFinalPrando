@@ -51,6 +51,14 @@ class AvatarFormulario(forms.ModelForm):
     model=Avatar
     fields=('imagen',)
 
+  def clean_imagen(self):
+    imagen = self.cleaned_data.get('imagen')
+    if not imagen:
+      raise forms.ValidationError("Debes seleccionar una imagen.")
+    return imagen
+
+class ConfirmarEliminacionForm(forms.Form):
+    confirm = forms.BooleanField(required=True, label="Confirmo que quiero eliminar mi avatar.")
 
 class ContactoFormulario(forms.Form):
     nombre = forms.CharField(max_length=100)

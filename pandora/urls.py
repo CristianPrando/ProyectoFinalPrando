@@ -38,6 +38,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name="Logout.html"), name='Logout'),
     path('editarperfil/', editar_perfil, name='editarperfil'),
     path('agregar-avatar/', agregar_avatar, name='AgregarAvatar'),
+    path('eliminar-avatar/', eliminar_avatar, name='eliminar_avatar'),
+    path('confirmar-eliminario-avatar/', confirmar_eliminacion_avatar, name='confirmar_eliminacion_avatar'),
     path('carrito/', carrito_view, name='carrito'),
     path('agregar_al_carrito/<int:amigurumi_id>/', agregar_al_carrito, name='agregar_al_carrito'),
     path('carrito/eliminar/<int:id>/', eliminar_producto, name='eliminar_producto'),

@@ -11,16 +11,20 @@
 
 {% block cambios1 %}
 <div style="display: flex; justify-content: space-between; align-items: flex-start;"></div>
-  <div style="flex: 1; border: 3px solid #f3b1b1; margin-top: 35px; margin-left: 100px; margin-right: 100px; margin-bottom: 100px; border-radius: 5px;">
-    <h3 style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #bf5e5e; margin-left: 10px;">Si es tu primera vez, puedes crear un avatar</h3>  
+  <div style="flex: 1; border: 3px solid #f3b1b1; margin-top: 35px; margin-left: 350px; margin-right: 350px; margin-bottom: 100px; border-radius: 5px; text-align: center;">
+    <h3 style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #bf5e5e; margin-left: 10px;">Aquí puedes crear o actualizar tu avatar!</h3>  
     <form action="{% url 'AgregarAvatar' %}" enctype="multipart/form-data" method="post" style="margin-left: 10px; color: #a24747;">{% csrf_token %}
 
         {{mi_formulario.as_p}}
 
-        <button type="submit" style="margin-bottom: 10px; background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
-          Agregar
-        </button>
+        {% if mi_formulario.non_field_errors %}
+        <div class="error">{{ mi_formulario.non_field_errors }}</div>
+        {% endif %}
 
+        <button type="submit" style="margin-bottom: 10px; background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
+          Agregar/actualizar
+        </button>
+        
     </form>
   </div>
 </div>

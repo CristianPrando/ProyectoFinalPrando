@@ -1,0 +1,25 @@
+{% extends 'padre.html' %}
+
+{% block cambioencabezado %}
+
+          <h1 class="display-4 fw-bolder" style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #a05050;">Eliminar Avatar?</h1>
+          <p class="lead fw-normal text-black-50 mb-0">.</p>
+      
+{% endblock cambioencabezado %}
+
+{% block cambios1 %}
+    
+<div style="flex: 1; max-width: 400px; margin: 0 auto; margin-top: 20px; margin-bottom: 20px; border: 3px solid #f3b1b1; padding: 20px; border-radius: 5px;">
+    <h1 style="font-family: 'NombreDeLaFuente', Verdana, Geneva, Tahoma, sans-serif; color: #cb8383;" class="text-center">¿Qué desea hacer a continuación?</h1>
+    <div style="display: flex; gap: 10px; justify-content: center;">
+        <form action="{% url 'eliminar_avatar' %}" method="post" style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">{% csrf_token %}
+            <button type="submit" class="btn btn-link nav-link">
+              Eliminar Avatar
+            </button>
+        </form>
+        <form action="{% url 'inicio' %}" method="get"> 
+            <button style="background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">Cancelar</button>
+        </form>
+    </div>
+</div>
+{% endblock cambios1 %}
