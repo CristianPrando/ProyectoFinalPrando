@@ -130,35 +130,34 @@ def register(req):
 
     return render(req, "registro.html", {"mi_formulario": mi_formulario})
     
-@login_required()
+@login_required
 def editar_perfil(req):
+    usuario = req.user
 
-  usuario = req.user
+    if req.method == 'POST':
+        mi_formulario = UserEditForm(req.POST, instance=usuario)
+        if mi_formulario.is_valid():
+            data = mi_formulario.cleaned_data
+            usuario.first_name = data['first_name']
+            usuario.last_name = data['last_name']
+            usuario.email = data['email']
+            
+            if data.get('password1'):
+                usuario.set_password(data["password1"])
 
-  if req.method == 'POST':
-    
-    mi_formulario= UserEditForm(req.POST, instance=req.user)
-    if mi_formulario.is_valid():
+            usuario.save()
+            messages.success(req, "Datos actualizados exitosamente!")
+            return redirect("Login") 
 
-      data = mi_formulario.cleaned_data
-      usuario.first_name = data['first_name']
-      usuario.last_name = data['last_name']
-      usuario.email = data['email']
-      usuario.set_password(data["password1"])
-      usuario.save()
-
-      return render(req, "inicio.html", { "mensaje": f"Datos actualizados exitosamente!"})
+        else:
+            return render(req, "editar_perfil.html", {"mi_formulario": mi_formulario})
 
     else:
-      return render(req, "editar_perfil.html", { "mi_formulario": mi_formulario })    
-
-  else:
-
-    mi_formulario = UserEditForm(instance=req.user)
-    return render(req, "editar_perfil.html", { "mi_formulario": mi_formulario })  
+        mi_formulario = UserEditForm(instance=usuario)
+        return render(req, "editar_perfil.html", {"mi_formulario": mi_formulario})
   
 
-
+@login_required
 def agregar_avatar(req):
     if req.method == 'POST':
         mi_formulario = AvatarFormulario(req.POST, req.FILES)

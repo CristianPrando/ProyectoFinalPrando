@@ -18,8 +18,13 @@
         {{mi_formulario.as_p}}
 
         {% if mi_formulario.non_field_errors %}
-        <div class="error">{{ mi_formulario.non_field_errors }}</div>
+          <div class="error">{{ mi_formulario.non_field_errors }}</div>
         {% endif %}
+        {% for field in mi_formulario %}
+        {% for error in field.errors %}
+          <div class="error">{{ error }}</div>
+        {% endfor %}
+        {% endfor %}
 
         <button type="submit" style="margin-bottom: 10px; background-color: #f78480; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
           Agregar/actualizar
